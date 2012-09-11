@@ -1,0 +1,7 @@
+_build
+dist
+*.egg*
+*.pyc
+.ropeproject
+.tags
+.vimrc
