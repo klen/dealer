@@ -1,7 +1,13 @@
 from .settings import BACKEND
 
 
-class Dealer:
+def context_processor(request):
+    " Append current SCM revision to template context. "
+
+    return dict(REVISION=BACKEND.revision)
+
+
+class Middleware:
     " Append current SCM revision to request object. "
 
     @staticmethod
