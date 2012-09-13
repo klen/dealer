@@ -9,6 +9,7 @@ SCM watcher tool. Get current revision and send update notify.
 """
 
 import os
+import sys
 
 from setuptools import setup, find_packages
 
@@ -20,6 +21,10 @@ def read(fname):
         return open(os.path.join(os.path.dirname(__file__), fname)).read()
     except IOError:
         return ''
+
+install_requires = ['gitpython>=0.2', 'mercurial>=2']
+if sys.version_info < (2, 7):
+    install_requires.append('importlib')
 
 
 META_DATA = dict(
@@ -41,7 +46,7 @@ META_DATA = dict(
     ],
 
     packages=find_packages(),
-    install_requires=['GitPython>=0.3.2'],
+    install_requires=install_requires,
     test_suite = 'tests',
 )
 

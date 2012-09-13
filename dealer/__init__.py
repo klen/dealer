@@ -13,13 +13,10 @@ __author__ = "Kirill Klenov <horneds@gmail.com>"
 __license__ = "BSD"
 
 
-DEFAULT_SCM = 'git'
+def get_backend(name, **kwargs):
+    " Create backend by name. "
 
+    from importlib import import_module
 
-class Dealer:
-
-    def __init__(self, scm=None):
-        self.scm = scm or DEFAULT_SCM
-
-    def init_app(self):
-        pass
+    mod = import_module(__name__ + '.' + name)
+    return mod.Backend(**kwargs)
