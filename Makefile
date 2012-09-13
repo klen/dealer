@@ -11,6 +11,7 @@ clean:
 	find . -name "*.orig" -delete
 
 .PHONY: register
+register:
 	python setup.py register
 
 .PHONY: upload
