@@ -16,6 +16,11 @@ Supported Git_, Mercurial_ and simple revision parse by file.
 
 .. note:: For Mercurial support install mercurial
 
+.. image:: https://secure.travis-ci.org/klen/dealer.png?branch=develop
+    :target: http://travis-ci.org/klen/dealer
+    :alt: Build Status
+
+.. contents::
 
 Requirements
 =============
