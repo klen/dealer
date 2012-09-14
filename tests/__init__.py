@@ -80,3 +80,10 @@ class DealerTest(TestCase):
 
         git = get_backend('git')
         self.assertTrue(git.repo)
+
+    def test_backends(self):
+        from dealer import get_backend
+
+        path = op.dirname(__file__)
+        auto = get_backend('auto', path=path, backends=('simple', 'git'))
+        self.assertTrue(auto.repo)
