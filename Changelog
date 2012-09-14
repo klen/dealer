@@ -1,4 +1,5 @@
 2012-09-14  klen
 
 	* Remove mercurial from requirements
+	* Null backend
 	* Support filename option
