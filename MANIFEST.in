@@ -1,2 +1,2 @@
-recursive-include dealer *
+recursive-include dealer *.py
 exclude *.pyc *.orig
