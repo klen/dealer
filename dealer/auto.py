@@ -3,19 +3,23 @@ from .base import SCMBackend
 
 class Backend(SCMBackend):
 
+    default_backends = 'git', 'mercurial', 'simple'
+
     def __init__(self, **kwargs):
         super(Backend, self).__init__(**kwargs)
         self._backend = None
 
     def init_repo(self):
-        from . import git, mercurial, simple
+        from importlib import import_module
 
-        for mod in (git, mercurial, simple):
+        backends = self.options.get('backends') or self.default_backends
+        for mod_name in backends:
+            mod = import_module('dealer.' + mod_name)
             try:
                 self._backend = mod.Backend(self.path, **self.options)
                 break
 
-            except TypeError:
+            except (TypeError, ImportError):
                 continue
 
         if not self._backend:
