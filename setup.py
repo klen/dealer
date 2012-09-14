@@ -22,7 +22,7 @@ def read(fname):
     except IOError:
         return ''
 
-install_requires = ['gitpython>=0.2', 'mercurial>=2']
+install_requires = ['gitpython>=0.2']
 if sys.version_info < (2, 7):
     install_requires.append('importlib')
 
@@ -47,6 +47,7 @@ META_DATA = dict(
 
     packages=find_packages(),
     install_requires=install_requires,
+    tests_require='unittest2',
     test_suite = 'tests',
 )
 

@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest2 import TestCase
 from os import path as op
 
 
@@ -25,21 +25,22 @@ class DealerTest(TestCase):
         self.assertTrue(git.repo)
 
     def test_hg(self):
-        from dealer.mercurial import hg, Backend
+        try:
+            from dealer.mercurial import hg, Backend
 
-        path = op.join(op.dirname(__file__), 'hg')
-        hg.path = path
-        self.assertTrue(hg.repo)
-        self.assertTrue(hg.revision)
+            path = op.join(op.dirname(__file__), 'hg')
+            hg.path = path
+            self.assertTrue(hg.repo)
+            self.assertTrue(hg.revision)
 
-        hg.path = 'invalid/path/to/hg'
-        self.assertFalse(hg._repo)
+            hg.path = 'invalid/path/to/hg'
+            self.assertFalse(hg._repo)
 
-        with self.assertRaises(TypeError):
-            assert hg.repo
+            hg = Backend(path)
+            self.assertTrue(hg.repo)
 
-        hg = Backend(path)
-        self.assertTrue(hg.repo)
+        except TypeError:
+            assert True
 
     def test_simple(self):
         from dealer.simple import simple, Backend

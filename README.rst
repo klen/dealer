@@ -14,6 +14,8 @@ On clientside: ::
 
 Supported Git_, Mercurial_ and simple revision parse by file.
 
+.. note:: For Mercurial support install mercurial
+
 
 Requirements
 =============
