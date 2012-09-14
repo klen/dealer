@@ -87,3 +87,8 @@ class DealerTest(TestCase):
         path = op.dirname(__file__)
         auto = get_backend('auto', path=path, backends=('simple', 'git'))
         self.assertTrue(auto.repo)
+
+    def test_null(self):
+        from dealer.null import null
+
+        self.assertTrue(null.repo)
