@@ -17,9 +17,10 @@ class Backend(SCMBackend):
             mod = import_module('dealer.' + mod_name)
             try:
                 self._backend = mod.Backend(self.path, **self.options)
+                assert self._backend.repo
                 break
 
-            except (TypeError, ImportError):
+            except (TypeError, ImportError, AssertionError):
                 continue
 
         if not self._backend:
