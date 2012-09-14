@@ -59,6 +59,9 @@ class DealerTest(TestCase):
         simple = Backend(op.join(path, 'revision'))
         self.assertEqual(simple.revision, 'test_revision')
 
+        simple = Backend(path, filename='REVISION')
+        self.assertEqual(simple.revision, 'cap1254')
+
     def test_auto(self):
         from dealer.auto import auto
         from dealer.git import git
