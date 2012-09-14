@@ -1,3 +1,4 @@
 2012-09-14  klen
 
 	* Remove mercurial from requirements
+	* Support filename option
