@@ -7,7 +7,7 @@
 
 """
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 __project__ = __name__
 __author__ = "Kirill Klenov <horneds@gmail.com>"
 __license__ = "BSD"
