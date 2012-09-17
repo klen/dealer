@@ -92,3 +92,17 @@ class DealerTest(TestCase):
         from dealer.null import null
 
         self.assertTrue(null.repo)
+
+    def test_flask(self):
+        from flask import Flask, g
+        from dealer.contrib.flask import Dealer
+
+        app = Flask('test')
+        Dealer(app)
+        self.assertTrue(app.revision)
+        app.route('/')(lambda: g.revision)
+        with app.test_request_context():
+            client = app.test_client()
+            response = client.get('/')
+            print response.data
+            self.assertTrue(app.revision in response.data)

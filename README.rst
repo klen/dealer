@@ -99,6 +99,37 @@ And use in your views: ::
 Or in your templates by `request.revision` var.
 
 
+Flask support
+-------------
+
+Settings
+^^^^^^^^
+
+*DEALER_TYPE* — Type of SCM_ repository ('auto', 'git', 'mercurial', 'simple'). By default 'auto'
+*DEALER_PARAMS* — Params for backend
+
+Usage
+^^^^^
+
+In views::
+
+        from flask import Flask, g
+        from dealer.contrib.flask import Dealer
+
+        app = Flask('test')
+        Dealer(app)
+        assert app.revision
+
+        @app.route('/')
+        def usage_in_view():
+            return g.revision
+
+
+In templates: ::
+
+    <link href="/test.css?{{ REVISION }}" rel="stylesheet" type="text/css" media="screen" />
+
+
 Bug tracker
 ===========
 
