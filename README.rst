@@ -57,6 +57,7 @@ Manualy create backend
 
 **path** — path to SCM_ repository (current dir by default)
 ::
+
     from dealer.mercurial import Backend
 
     hg = Backend('/path/to/hg/repo')
@@ -141,7 +142,7 @@ at https://github.com/klen/Dealer/issues
 Contributing
 ============
 
-Development of dealer happens at github: https://github.com/klen/Flask-Mixer
+Development of dealer happens at github: https://github.com/klen/dealer
 
 
 Contributors
