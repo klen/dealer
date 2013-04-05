@@ -1,4 +1,4 @@
-from unittest2 import TestCase
+from unittest import TestCase # nolint
 from os import path as op
 
 
@@ -7,13 +7,13 @@ class DealerTest(TestCase):
     def test_git(self):
 
         from dealer.git import git, Backend
-        from git import Repo
+        from git import Repo # nolint
 
         self.assertTrue(git.repo)
         self.assertEqual(git.revision, Repo().head.commit.hexsha)
 
         git.path = 'invalid/path/to/git'
-        self.assertFalse(git._repo)
+        self.assertFalse(git._repo) # nolint
 
         with self.assertRaises(TypeError):
             assert git.repo
@@ -34,7 +34,7 @@ class DealerTest(TestCase):
             self.assertTrue(hg.revision)
 
             hg.path = 'invalid/path/to/hg'
-            self.assertFalse(hg._repo)
+            self.assertFalse(hg._repo) # nolint
 
             hg = Backend(path)
             self.assertTrue(hg.repo)
@@ -51,7 +51,7 @@ class DealerTest(TestCase):
         self.assertEqual(simple.revision, 'default')
 
         simple.path = 'invalid/path/to/hg'
-        self.assertFalse(simple._repo)
+        self.assertFalse(simple._repo) # nolint
 
         with self.assertRaises(TypeError):
             assert simple.repo
@@ -59,7 +59,7 @@ class DealerTest(TestCase):
         simple = Backend(op.join(path, 'revision'))
         self.assertEqual(simple.revision, 'test_revision')
 
-        simple = Backend(path, filename='REVISION')
+        simple = Backend(path, filename='revision2')
         self.assertEqual(simple.revision, 'cap1254')
 
     def test_auto(self):
@@ -94,7 +94,7 @@ class DealerTest(TestCase):
         self.assertTrue(null.repo)
 
     def test_flask(self):
-        from flask import Flask, g
+        from flask import Flask, g # nolint
         from dealer.contrib.flask import Dealer
 
         app = Flask('test')

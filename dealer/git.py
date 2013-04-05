@@ -1,8 +1,8 @@
 from __future__ import absolute_import
 
-from git import Repo, InvalidGitRepositoryError, NoSuchPathError
+from git import Repo, InvalidGitRepositoryError, NoSuchPathError # nolint
 
-from .base import SCMBackend
+from .base import SCMBackend, logger
 
 
 class Backend(SCMBackend):
@@ -15,7 +15,11 @@ class Backend(SCMBackend):
             return self._repo
 
         except (InvalidGitRepositoryError, NoSuchPathError):
-            raise TypeError('Git repository not found.')
+            message = 'Git repository not found: {0}'.format(self.path)
+            if not self.options.get('silent'):
+                logger.error(message)
+
+            raise TypeError(message)
 
 
 git = Backend()

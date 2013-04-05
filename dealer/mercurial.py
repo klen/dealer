@@ -1,9 +1,9 @@
 from __future__ import absolute_import
 
-from .base import SCMBackend
+from .base import SCMBackend, logger
 
 try:
-    from mercurial import ui, hg as HG, error
+    from mercurial import ui, hg as HG, error  # nolint
 
     class Backend(SCMBackend):
         " Mercurial backend. "
@@ -13,7 +13,12 @@ try:
                 self._repo = HG.repository(ui.ui(), path=self.path or '.')
                 self._revision = self._repo[len(self._repo) - 1].hex()
             except error.RepoError:
-                raise TypeError('Mercurial repository not found.')
+                message = 'Mercurial repository not found: {0}'.format(
+                    self.path)
+                if not self.options.get('silent'):
+                    logger.error(message)
+
+                raise TypeError(message)
 
             return self._repo
 
@@ -21,9 +26,12 @@ except ImportError:
 
     class Backend(SCMBackend):
 
-        @staticmethod
-        def init_repo():
-            raise TypeError('Mercurial not installed.')
+        def init_repo(self):
+            message = 'Mercurial is not installed.'
+            if not self.options.get('silent'):
+                logger.error(message)
+
+            raise TypeError(message)
 
 
 hg = Backend()

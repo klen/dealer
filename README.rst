@@ -69,8 +69,9 @@ Django support
 Settings
 ^^^^^^^^
 
-*DEALER_TYPE* — Type of SCM_ repository ('auto', 'git', 'mercurial', 'simple'). By default 'auto'
+*DEALER_TYPE* — Type of SCM_ repository ('auto', 'git', 'mercurial', 'simple', 'null'). By default 'auto'
 *DEALER_PATH* — Path to SCM_. By default current dir
+*DEALER_SILENT* — Disable log warnings
 
 
 Context-processor
@@ -106,7 +107,7 @@ Flask support
 Settings
 ^^^^^^^^
 
-*DEALER_TYPE* — Type of SCM_ repository ('auto', 'git', 'mercurial', 'simple'). By default 'auto'
+*DEALER_TYPE* — Type of SCM_ repository ('auto', 'git', 'mercurial', 'simple', 'silent'). By default 'auto'
 *DEALER_PARAMS* — Params for backend
 
 Usage

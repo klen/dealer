@@ -1,4 +1,4 @@
-from .base import SCMBackend
+from .base import SCMBackend, logger
 
 
 class Backend(SCMBackend):
@@ -6,6 +6,7 @@ class Backend(SCMBackend):
     def init_repo(self):
         self._repo = self
         self._revision = 'null'
+        logger.warning('Dealer uses "null" revision.')
         return self
 
 
