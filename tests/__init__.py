@@ -1,4 +1,4 @@
-from unittest import TestCase # nolint
+from unittest2 import TestCase # nolint
 from os import path as op
 
 
