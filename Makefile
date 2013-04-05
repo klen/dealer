@@ -26,9 +26,9 @@ register:
 upload: clean
 	python setup.py sdist upload || echo 'Upload already'
 
-.PHONY: test
-# target: test - Run module tests
-test:
+.PHONY: t
+# target: t - Run module tests
+t:
 	python setup.py test
 
 .PHONY: audit
@@ -38,7 +38,7 @@ audit:
 
 .PHONY: travis
 # target: travis - Audit code and run tests
-travis: audit test
+travis: audit t
 
 .PHONY: docs
 # target: docs - Compile docs

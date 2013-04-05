@@ -3,7 +3,7 @@ from .base import SCMBackend
 
 class Backend(SCMBackend):
 
-    default_backends = 'git', 'mercurial', 'simple'
+    default_backends = 'git', 'mercurial', 'simple', 'null'
 
     def __init__(self, **kwargs):
         super(Backend, self).__init__(**kwargs)
@@ -23,13 +23,12 @@ class Backend(SCMBackend):
             except (TypeError, ImportError, AssertionError):
                 continue
 
-        if not self._backend:
-            raise TypeError('Invalid repository.')
+        if self._backend:
+            self._repo = self._backend.repo
+            self._revision = self._backend.revision
+            return self._repo
 
-        self._repo = self._backend.repo
-        self._revision = self._backend.revision
-
-        return self._repo
+        raise TypeError('Invalid project: {0}'.format(self.path))
 
 
 auto = Backend()

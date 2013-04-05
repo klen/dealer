@@ -1,4 +1,8 @@
 import abc
+import logging
+
+
+logger = logging.getLogger('DEALER')
 
 
 class SCMBackend(object):
