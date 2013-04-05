@@ -69,9 +69,13 @@ Django support
 Settings
 ^^^^^^^^
 
-*DEALER_TYPE* — Type of SCM_ repository ('auto', 'git', 'mercurial', 'simple', 'null'). By default 'auto'
-*DEALER_PATH* — Path to SCM_. By default current dir
-*DEALER_SILENT* — Disable log warnings
+**DEALER_TYPE** — Type of SCM_ repository ('auto', 'git', 'mercurial', 'simple', 'null'). By default 'auto';
+
+**DEALER_PATH** — Path to SCM_. By default current dir;
+
+**DEALER_SILENT** — Disable log warnings;
+
+**DEALER_BACKENDS** — Backends for auto search by default ('git', 'mercurial', 'simple', 'null');
 
 
 Context-processor
