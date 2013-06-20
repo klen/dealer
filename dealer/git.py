@@ -1,25 +1,80 @@
+""" Git support. """
 from __future__ import absolute_import
 
-from git import Repo, InvalidGitRepositoryError, NoSuchPathError # nolint
+from os import path as op, name, getcwd
+
+from subprocess import Popen, PIPE
 
 from .base import SCMBackend, logger
 
 
+class GitException(Exception):
+
+    """ Exception for git related errors. """
+
+    pass
+
+
+class GitRepo:
+
+    """ Initialize Git repository. """
+
+    git_cmd = 'git'
+
+    def __init__(self, path):
+        self.path = path or getcwd()
+
+        if not op.isdir(self.path):
+            self.path = op.dirname(self.path)
+
+        if not op.exists(self.path):
+            raise GitException('Path doesnt exists: %s' % self.path)
+
+    def git(self, cmd, stderr=PIPE, stdout=PIPE, **kwargs):
+        """ Run git command.
+
+        :return str: The command output.
+
+        """
+
+        cmd = ' '.join((self.git_cmd, cmd))
+
+        try:
+            proc = Popen(
+                cmd.split(), stderr=stderr, stdout=stdout,
+                close_fds=(name == 'posix'), **kwargs)
+
+        except OSError:
+            raise GitException('Git not found.')
+
+        stdout, stderr = [s.strip() for s in proc.communicate()]
+        status = proc.returncode
+        if status:
+            raise GitException(stderr)
+
+        return stdout
+
+
 class Backend(SCMBackend):
-    " Git backend. "
+
+    """ Git backend. """
 
     def init_repo(self):
+        """ Initialize self repo.
+
+        :return GitRepo:
+
+        """
         try:
-            self._repo = Repo(self.path)
-            self._revision = self.repo.head.commit.hexsha
+            self._repo = GitRepo(self.path)
+            self._revision = self.repo.git('log -1 --format=%h')
             return self._repo
 
-        except (InvalidGitRepositoryError, NoSuchPathError):
-            message = 'Git repository not found: {0}'.format(self.path)
+        except GitException as e:
             if not self.options.get('silent'):
-                logger.error(message)
+                logger.error(e)
 
-            raise TypeError(message)
+            raise TypeError(e)
 
 
 git = Backend()

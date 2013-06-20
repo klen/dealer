@@ -1,2 +1,10 @@
-recursive-include dealer *.py
-exclude *.pyc *.orig
+include LICENSE
+include MANIFEST.in
+include README.rst
+include requirements.txt
+
+recursive-include dealer *
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude * *.orig

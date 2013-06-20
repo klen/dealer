@@ -1,4 +1,4 @@
-from unittest2 import TestCase # nolint
+from unittest import TestCase
 from os import path as op
 
 
@@ -7,16 +7,18 @@ class DealerTest(TestCase):
     def test_git(self):
 
         from dealer.git import git, Backend
-        from git import Repo # nolint
 
         self.assertTrue(git.repo)
-        self.assertEqual(git.revision, Repo().head.commit.hexsha)
+        self.assertTrue(git.revision)
 
         git.path = 'invalid/path/to/git'
         self.assertFalse(git._repo) # nolint
 
-        with self.assertRaises(TypeError):
+        try:
             assert git.repo
+            raise AssertionError('test.failed')
+        except TypeError:
+            pass
 
         git.path = op.abspath(op.dirname(op.dirname(__file__)))
         self.assertTrue(git.repo)
@@ -53,8 +55,11 @@ class DealerTest(TestCase):
         simple.path = 'invalid/path/to/hg'
         self.assertFalse(simple._repo) # nolint
 
-        with self.assertRaises(TypeError):
+        try:
             assert simple.repo
+            raise AssertionError('test.failed')
+        except TypeError:
+            pass
 
         simple = Backend(op.join(path, 'revision'))
         self.assertEqual(simple.revision, 'test_revision')
@@ -104,5 +109,6 @@ class DealerTest(TestCase):
         with app.test_request_context():
             client = app.test_client()
             response = client.get('/')
-            print response.data
             self.assertTrue(app.revision in response.data)
+
+# lint_ignore=C0110

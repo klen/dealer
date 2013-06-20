@@ -1,5 +1,7 @@
-Dealer
-######
+|logo| Dealer
+#############
+
+.. _description:
 
 Dealer — SCM_ revision helper in your projects. Just add SCM_ revision to
 your static paths and get automatic control at client browser caches:
@@ -14,18 +16,46 @@ On clientside: ::
 
 Supported Git_, Mercurial_ and simple revision parse by file.
 
-.. note:: For Mercurial support install mercurial
+.. note:: You should install Mercurial_ for hg support.
+
+
+.. _badges:
 
 .. image:: https://secure.travis-ci.org/klen/dealer.png?branch=develop
     :target: http://travis-ci.org/klen/dealer
     :alt: Build Status
 
+.. image:: https://coveralls.io/repos/klen/dealer/badge.png?branch=develop
+    :target: https://coveralls.io/r/klen/dealer
+    :alt: Coverals
+
+.. image:: https://pypip.in/v/dealer/badge.png
+    :target: https://crate.io/packages/dealer
+    :alt: Version
+
+.. image:: https://pypip.in/d/dealer/badge.png
+    :target: https://crate.io/packages/dealer
+    :alt: Downloads
+
+.. image:: https://dl.dropboxusercontent.com/u/487440/reformal/donate.png
+    :target: https://www.gittip.com/klen/
+    :alt: Donate
+
+
+.. _contents:
+
 .. contents::
+
+
+.. _requirements:
 
 Requirements
 =============
 
-- python >= 2.6
+- python (2.6, 2.7, 3.3)
+
+
+.. _installation:
 
 Installation
 =============
@@ -33,6 +63,9 @@ Installation
 **Dealer** should be installed using pip: ::
 
     pip install dealer
+
+
+.. _usage:
 
 Usage
 =====
@@ -136,6 +169,8 @@ In templates: ::
     <link href="/test.css?{{ REVISION }}" rel="stylesheet" type="text/css" media="screen" />
 
 
+.. _bagtracker:
+
 Bug tracker
 ===========
 
@@ -144,11 +179,15 @@ annoyances please report them to the issue tracker
 at https://github.com/klen/Dealer/issues
 
 
+.. _contributing:
+
 Contributing
 ============
 
 Development of dealer happens at github: https://github.com/klen/dealer
 
+
+.. _contributors:
 
 Contributors
 =============
@@ -156,14 +195,20 @@ Contributors
 * klen_ (Kirill Klenov)
 
 
+.. _license:
+
 License
 =======
 
 Licensed under a `BSD license`_.
 
 
+.. _links:
+
 .. _BSD license: http://www.linfo.org/bsdlicense.html
 .. _klen: http://klen.github.com/
 .. _SCM: http://en.wikipedia.org/wiki/Source_Control_Management
 .. _Git: http://en.wikipedia.org/wiki/Git_(oftware)
 .. _Mercurial: http://en.wikipedia.org/wiki/Mercurial
+.. |logo| image:: https://raw.github.com/klen/dealer/develop/docs/_static/logo.png
+                  :width: 100
