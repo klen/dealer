@@ -8,49 +8,57 @@ SCM watcher tool. Get current revision and send update notify.
 
 """
 
-import os
 import sys
+from os import path as op
 
 from setuptools import setup, find_packages
-
-from dealer import __version__, __project__, __license__
 
 
 def read(fname):
     try:
-        return open(os.path.join(os.path.dirname(__file__), fname)).read()
+        return open(op.join(op.dirname(__file__), fname)).read()
     except IOError:
         return ''
 
-install_requires = ['gitpython>=0.2']
+
+NAME = 'dealer'
+
+CURDIR = op.dirname(__file__)
+MODULE = __import__(NAME)
+README = op.join(CURDIR, 'README.rst')
+REQUIREMENTS = open(op.join(CURDIR, 'requirements.txt')).readlines()
+
 if sys.version_info < (2, 7):
-    install_requires.append('importlib')
+    REQUIREMENTS.append('importlib')
 
 
-META_DATA = dict(
-    name=__project__,
-    version=__version__,
-    license=__license__,
+setup(
+    name=NAME,
+    version=MODULE.__version__,
+    license=MODULE.__license__,
+    author=MODULE.__author__,
     description=read('DESCRIPTION'),
     long_description=read('README.rst'),
     platforms=('Any'),
+    keywords = "mercurial git static revision django flask".split(),
 
-    author='Kirill Klenov',
     author_email='horneds@gmail.com',
     url=' http://github.com/klen/dealer',
     classifiers=[
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
+        'Intended Audience :: System Administrators',
+        'Natural Language :: Russian',
+        'Natural Language :: English',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 3.3',
+        'Environment :: Console',
     ],
 
     packages=find_packages(),
-    install_requires=install_requires,
-    tests_require=('unittest2', 'flask'),
+    install_requires=REQUIREMENTS,
     test_suite = 'tests',
+    tests_require=('flask'),
 )
-
-
-if __name__ == "__main__":
-    setup(**META_DATA)
