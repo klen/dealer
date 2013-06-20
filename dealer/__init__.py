@@ -7,14 +7,18 @@
 
 """
 
-__version__ = '0.2.1'
+__version__ = '0.2.2'
 __project__ = __name__
 __author__ = "Kirill Klenov <horneds@gmail.com>"
 __license__ = "BSD"
 
 
 def get_backend(name, **kwargs):
-    " Create backend by name. "
+    """ Create backend by name.
+
+    :return Backend:
+
+    """
 
     from importlib import import_module
 
