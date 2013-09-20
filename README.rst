@@ -128,7 +128,7 @@ Middleware
     
 Append to your settings: ::
 
-    MIDDLEWARE_CLASSES += 'dealer.contrib.django.staff.middleware',
+    MIDDLEWARE_CLASSES += 'dealer.contrib.django.staff.Middleware',
 
 And use in your views: ::
 
