@@ -42,7 +42,7 @@ class GitRepo:
         try:
             proc = Popen(
                 cmd.split(), stderr=stderr, stdout=stdout,
-                close_fds=(name == 'posix'), **kwargs)
+                close_fds=(name == 'posix'), cwd=self.path, **kwargs)
 
         except OSError:
             raise GitException('Git not found.')
