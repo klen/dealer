@@ -23,6 +23,7 @@ class SCMBackend(object):
         self._path = path
         self._repo = None
         self._revision = None
+        self._tag = None
 
     @property
     def repo(self):
@@ -31,6 +32,10 @@ class SCMBackend(object):
     @property
     def revision(self):
         return self.repo and self._revision
+
+    @property
+    def tag(self):
+        return self.repo and self._tag
 
     @abc.abstractmethod
     def init_repo(self):
