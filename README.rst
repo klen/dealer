@@ -85,7 +85,7 @@ Basic usage
     print auto.revision
 
 
-Manualy create backend
+Manually create backend
 ----------------------
 
 **path** — path to SCM_ repository (current dir by default)
