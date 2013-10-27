@@ -12,7 +12,7 @@ help:
 .PHONY: clean
 # target: clean - Clean repo
 clean:
-	sudo rm -rf build dist
+	rm -rf build dist
 	find . -name "*.pyc" -delete
 	find . -name "*.orig" -delete
 

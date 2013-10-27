@@ -78,14 +78,18 @@ Basic usage
 
     print git.revision
 
+    print git.tag
+
 ::
 
     # Auto parse repository type
     from dealer.auto import auto
     print auto.revision
 
+    print auto.tag
 
-Manualy create backend
+
+Manually create backend
 ----------------------
 
 **path** — path to SCM_ repository (current dir by default)
@@ -118,7 +122,7 @@ Append to your settings: ::
 
     TEMPLATE_CONTEXT_PROCESSORS += 'dealer.contrib.django.staff.context_processor',
 
-And use *REVISION* variable in your templates: ::
+And use the *REVISION* and *TAG* variables in your templates: ::
 
     <link href="/test.css?{{ REVISION }}" rel="stylesheet" type="text/css" media="screen" />
     <script src="/test.js?{{ REVISION }}"></script>

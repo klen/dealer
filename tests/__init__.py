@@ -1,5 +1,6 @@
 from unittest import TestCase
 from os import path as op
+from sys import version_info
 
 
 class DealerTest(TestCase):
@@ -10,9 +11,10 @@ class DealerTest(TestCase):
 
         self.assertTrue(git.repo)
         self.assertTrue(git.revision)
+        self.assertTrue(git.tag)
 
         git.path = 'invalid/path/to/git'
-        self.assertFalse(git._repo) # nolint
+        self.assertFalse(git._repo)  # noqa
 
         try:
             assert git.repo
@@ -26,23 +28,21 @@ class DealerTest(TestCase):
         git = Backend('.')
         self.assertTrue(git.repo)
 
-    def test_hg(self):
-        try:
+    if version_info < (3, 0):
+        def test_hg(self):
             from dealer.mercurial import hg, Backend
 
             path = op.join(op.dirname(__file__), 'hg')
             hg.path = path
             self.assertTrue(hg.repo)
             self.assertTrue(hg.revision)
+            self.assertTrue(hg.tag)
 
             hg.path = 'invalid/path/to/hg'
-            self.assertFalse(hg._repo) # nolint
+            self.assertFalse(hg._repo)  # noqa
 
             hg = Backend(path)
             self.assertTrue(hg.repo)
-
-        except TypeError:
-            assert True
 
     def test_simple(self):
         from dealer.simple import simple, Backend
@@ -51,9 +51,10 @@ class DealerTest(TestCase):
         simple.path = path
         self.assertTrue(simple.repo)
         self.assertEqual(simple.revision, 'default')
+        self.assertEqual(simple.tag, 'default')
 
         simple.path = 'invalid/path/to/hg'
-        self.assertFalse(simple._repo) # nolint
+        self.assertFalse(simple._repo)  # noqa
 
         try:
             assert simple.repo
@@ -99,16 +100,35 @@ class DealerTest(TestCase):
         self.assertTrue(null.repo)
 
     def test_flask(self):
-        from flask import Flask, g # nolint
+        from flask import Flask, g
         from dealer.contrib.flask import Dealer
 
         app = Flask('test')
         Dealer(app)
         self.assertTrue(app.revision)
-        app.route('/')(lambda: g.revision)
+        app.route('/')(lambda: "%s - %s" % (g.revision, g.tag))
         with app.test_request_context():
             client = app.test_client()
             response = client.get('/')
             self.assertTrue(app.revision in response.data)
+            self.assertTrue(app.tag in response.data)
 
-# lint_ignore=C0110
+    def test_django(self):
+        from django.conf import settings
+
+        settings.configure(
+            ROOT_URLCONF='tests.django_app.urls',
+            TEMPLATE_CONTEXT_PROCESSORS = ('dealer.contrib.django.staff.context_processor',), # noqa
+            MIDDLEWARE_CLASSES = ('dealer.contrib.django.staff.Middleware',),
+
+        )
+        from django.test import Client
+
+        client = Client()
+        revision = client.get('/revision/')
+        self.assertEqual(revision.status_code, 200)
+        self.assertTrue(revision.content)
+
+        tag = client.get('/tag/')
+        self.assertEqual(tag.status_code, 200)
+        self.assertTrue(tag.content)

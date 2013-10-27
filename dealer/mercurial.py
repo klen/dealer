@@ -1,3 +1,5 @@
+""" Mercurial support. """
+
 from __future__ import absolute_import
 
 from .base import SCMBackend, logger
@@ -12,6 +14,7 @@ try:
             try:
                 self._repo = HG.repository(ui.ui(), path=self.path or '.')
                 self._revision = self._repo[len(self._repo) - 1].hex()
+                self._tag = self._repo.tagslist()[0]
             except error.RepoError:
                 message = 'Mercurial repository not found: {0}'.format(
                     self.path)

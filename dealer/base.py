@@ -1,3 +1,5 @@
+""" Abstract backend support. """
+
 import abc
 import logging
 
@@ -6,7 +8,8 @@ logger = logging.getLogger('DEALER')
 
 
 class SCMBackend(object):
-    " Abstract SCM Backend. "
+
+    """ Abstract SCM Backend. """
 
     __meta__ = abc.ABCMeta
 
@@ -16,25 +19,50 @@ class SCMBackend(object):
 
     @property
     def path(self):
+        """ Get path to SCM.
+
+        :return str:
+
+        """
         return self._path
 
     @path.setter
     def path(self, path):
+        """ Set path and clean current state. """
+
         self._path = path
         self._repo = None
         self._revision = None
+        self._tag = None
 
     @property
     def repo(self):
+        """ Cache repository.
+
+        :return object: A repo
+
+        """
         return self._repo or self.init_repo()
 
     @property
     def revision(self):
+        """ Get current revision.
+
+        :return str:
+
+        """
         return self.repo and self._revision
+
+    @property
+    def tag(self):
+        """ Get current tag.
+
+        :return str:
+
+        """
+        return self.repo and self._tag
 
     @abc.abstractmethod
     def init_repo(self):
-        pass
-
-
-# pymode:lint_ignore=W0201
+        """ Initialize repository. """
+        raise NotImplementedError

@@ -1,4 +1,5 @@
 """ Git support. """
+
 from __future__ import absolute_import
 
 from os import path as op, name, getcwd
@@ -15,7 +16,7 @@ class GitException(Exception):
     pass
 
 
-class GitRepo:
+class GitRepo(object):
 
     """ Initialize Git repository. """
 
@@ -42,12 +43,12 @@ class GitRepo:
         try:
             proc = Popen(
                 cmd.split(), stderr=stderr, stdout=stdout,
-                close_fds=(name == 'posix'), **kwargs)
+                close_fds=(name == 'posix'), cwd=self.path, **kwargs)
 
         except OSError:
             raise GitException('Git not found.')
 
-        stdout, stderr = [s.strip() for s in proc.communicate()]
+        stdout, stderr = [s.strip() for s in proc.communicate()] # noqa
         status = proc.returncode
         if status:
             raise GitException(stderr)
@@ -68,6 +69,7 @@ class Backend(SCMBackend):
         try:
             self._repo = GitRepo(self.path)
             self._revision = self.repo.git('log -1 --format=%h')
+            self._tag = self.repo.git('describe --always --tags')
             return self._repo
 
         except GitException as e:
