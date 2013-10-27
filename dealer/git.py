@@ -1,4 +1,5 @@
 """ Git support. """
+
 from __future__ import absolute_import
 
 from os import path as op, name, getcwd
@@ -15,7 +16,7 @@ class GitException(Exception):
     pass
 
 
-class GitRepo:
+class GitRepo(object):
 
     """ Initialize Git repository. """
 
@@ -47,7 +48,7 @@ class GitRepo:
         except OSError:
             raise GitException('Git not found.')
 
-        stdout, stderr = [s.strip() for s in proc.communicate()]
+        stdout, stderr = [s.strip() for s in proc.communicate()] # noqa
         status = proc.returncode
         if status:
             raise GitException(stderr)

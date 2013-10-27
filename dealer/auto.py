@@ -1,7 +1,11 @@
+""" Select backend automaticaly. """
+
 from .base import SCMBackend
 
 
 class Backend(SCMBackend):
+
+    """ Check path and select backend automaticaly. """
 
     default_backends = 'git', 'mercurial', 'simple', 'null'
 
@@ -10,6 +14,12 @@ class Backend(SCMBackend):
         self._backend = None
 
     def init_repo(self):
+        """ Check path.
+
+        :return object: A repo
+        :raise TypeError: Supported backend not found.
+
+        """
         from importlib import import_module
 
         backends = self.options.get('backends') or self.default_backends
@@ -33,6 +43,3 @@ class Backend(SCMBackend):
 
 
 auto = Backend()
-
-
-# pymode:lint_ignore=W0201

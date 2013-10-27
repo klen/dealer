@@ -1,3 +1,5 @@
+""" Support Flask. """
+
 from __future__ import absolute_import
 
 from flask import g
@@ -5,9 +7,9 @@ from flask import g
 from .. import get_backend
 
 
-class Dealer():
-    """This class is used for integration to one or more Flask
-    applications.
+class Dealer(object):
+
+    """This class is used for integration to one or more Flask applications.
 
     :param app: Flask application
 
@@ -33,12 +35,14 @@ class Dealer():
             self.init_app(app)
 
     def init_app(self, app):
-        """This callback can be used to initialize an application for the
-        use with this dealer setup.
+        """The Callback can be used to initialize an application.
+
+        For the use with this dealer setup.
 
         See :ref:`configuration`.
 
         :param app: Flask application
+
         """
         if not hasattr(app, 'extensions'):
             app.extensions = dict()
@@ -47,7 +51,8 @@ class Dealer():
         self.params = app.config.get('DEALER_PARAMS', dict())
         self.backend = backend = get_backend(self.type, **self.params)
 
-        app.context_processor(lambda: dict(REVISION=backend.revision, TAG=backend.tag))
+        app.context_processor(
+            lambda: dict(REVISION=backend.revision, TAG=backend.tag))
         app.revision = backend.revision
         app.tag = backend.tag
 
