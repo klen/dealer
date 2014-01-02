@@ -48,7 +48,7 @@ class GitRepo(object):
         except OSError:
             raise GitException('Git not found.')
 
-        stdout, stderr = [s.strip() for s in proc.communicate()] # noqa
+        stdout, stderr = [s.strip() for s in proc.communicate()]  # noqa
         status = proc.returncode
         if status:
             raise GitException(stderr)
