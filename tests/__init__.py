@@ -1,5 +1,5 @@
 from unittest import TestCase
-from os import path as op
+from os import path as op, environ
 from sys import version_info
 
 
@@ -67,6 +67,26 @@ class DealerTest(TestCase):
 
         simple = Backend(path, filename='revision2')
         self.assertEqual(simple.revision, 'cap1254')
+
+    def test_env(self):
+        from dealer.env import env, Backend
+    
+        self.assertFalse(env._repo)
+    
+        environ['DEALER_REVISION'] = '3ffb6b6'
+        environ['DEALER_TAG'] = 'v1.0'
+    
+        self.assertTrue(env.repo)
+        self.assertEqual(env.revision, '3ffb6b6')
+        self.assertEqual(env.tag, 'v1.0')
+
+        environ['MY_REVISION'] = '3ffb6b7'
+        environ['MY_TAG'] = 'v1.1'
+
+        options = dict(revision_env_keyname = 'MY_REVISION', tag_env_keyname = 'MY_TAG')
+        env = Backend(**options)
+        self.assertEqual(env.revision, '3ffb6b7')
+        self.assertEqual(env.tag, 'v1.1')
 
     def test_auto(self):
         from dealer.auto import auto
