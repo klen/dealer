@@ -7,7 +7,7 @@ class Backend(SCMBackend):
 
     """ Check path and select backend automaticaly. """
 
-    default_backends = 'git', 'mercurial', 'simple', 'null'
+    default_backends = 'git', 'mercurial', 'simple', 'env', 'null'
 
     def __init__(self, **kwargs):
         super(Backend, self).__init__(**kwargs)

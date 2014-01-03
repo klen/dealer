@@ -106,13 +106,13 @@ Django support
 Settings
 ^^^^^^^^
 
-**DEALER_TYPE** — Type of SCM_ repository ('auto', 'git', 'mercurial', 'simple', 'null'). By default 'auto';
+**DEALER_TYPE** — Type of SCM_ repository ('auto', 'git', 'mercurial', 'simple', 'env', 'null'). By default 'auto';
 
 **DEALER_PATH** — Path to SCM_. By default current dir;
 
 **DEALER_SILENT** — Disable log warnings;
 
-**DEALER_BACKENDS** — Backends for auto search by default ('git', 'mercurial', 'simple', 'null');
+**DEALER_BACKENDS** — Backends for auto search by default ('git', 'mercurial', 'simple', 'env', 'null');
 
 
 Context-processor
@@ -148,7 +148,7 @@ Flask support
 Settings
 ^^^^^^^^
 
-*DEALER_TYPE* — Type of SCM_ repository ('auto', 'git', 'mercurial', 'simple', 'silent'). By default 'auto'
+*DEALER_TYPE* — Type of SCM_ repository ('auto', 'git', 'mercurial', 'simple', 'env', 'null'). By default 'auto'
 *DEALER_PARAMS* — Params for backend
 
 Usage
@@ -172,6 +172,29 @@ In templates: ::
 
     <link href="/test.css?{{ REVISION }}" rel="stylesheet" type="text/css" media="screen" />
 
+
+Heroku support
+-------------
+
+Settings
+^^^^^^^^
+
+*DEALER_TYPE* = 'env'
+*DEALER_PARAMS*:
+    *revision_env_keyname* - Variable name for revision (default: DEALER_REVISION)
+	*tag_env_keyname* - Variable name for tag (default: DEALER_TAG)
+
+Usage
+^^^^^
+
+Setup your revision and tag value in envirement variables.
+For example in Heroku.com:
+::
+    heroku config:set DEALER_REVISION='3ffb6b6'
+    heroku config:set DEALER_TAG=v1_1
+
+After that use dealer as described above.
+ 
 
 .. _bagtracker:
 
