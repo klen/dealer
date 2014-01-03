@@ -8,6 +8,7 @@ try:
     from mercurial import ui, hg as HG, error  # nolint
 
     class Backend(SCMBackend):
+
         " Mercurial backend. "
 
         def init_repo(self):
