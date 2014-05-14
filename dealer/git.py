@@ -23,6 +23,7 @@ class GitRepo(object):
     git_cmd = 'git'
 
     def __init__(self, path):
+        """ Init backend. """
         self.path = path or getcwd()
 
         if not op.isdir(self.path):
@@ -37,7 +38,6 @@ class GitRepo(object):
         :return str: The command output.
 
         """
-
         cmd = ' '.join((self.git_cmd, cmd))
 
         try:
@@ -80,6 +80,3 @@ class Backend(SCMBackend):
 
 
 git = Backend()
-
-
-# pymode:lint_ignore=W0201

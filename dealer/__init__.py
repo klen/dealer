@@ -22,7 +22,6 @@ def get_backend(name, **kwargs):
     :return Backend:
 
     """
-
     from importlib import import_module
 
     mod = import_module(__name__ + '.' + name)

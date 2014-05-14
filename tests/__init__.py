@@ -70,12 +70,12 @@ class DealerTest(TestCase):
 
     def test_env(self):
         from dealer.env import env, Backend
-    
+
         self.assertFalse(env._repo)
-    
+
         environ['DEALER_REVISION'] = '3ffb6b6'
         environ['DEALER_TAG'] = 'v1.0'
-    
+
         self.assertTrue(env.repo)
         self.assertEqual(env.revision, '3ffb6b6')
         self.assertEqual(env.tag, 'v1.0')
@@ -83,7 +83,7 @@ class DealerTest(TestCase):
         environ['MY_REVISION'] = '3ffb6b7'
         environ['MY_TAG'] = 'v1.1'
 
-        options = dict(revision_env_keyname = 'MY_REVISION', tag_env_keyname = 'MY_TAG')
+        options = dict(revision_env_keyname='MY_REVISION', tag_env_keyname='MY_TAG')
         env = Backend(**options)
         self.assertEqual(env.revision, '3ffb6b7')
         self.assertEqual(env.tag, 'v1.1')
@@ -138,8 +138,8 @@ class DealerTest(TestCase):
 
         settings.configure(
             ROOT_URLCONF='tests.django_app.urls',
-            TEMPLATE_CONTEXT_PROCESSORS = ('dealer.contrib.django.staff.context_processor',), # noqa
-            MIDDLEWARE_CLASSES = ('dealer.contrib.django.staff.Middleware',),
+            TEMPLATE_CONTEXT_PROCESSORS=('dealer.contrib.django.context_processor',), # noqa
+            MIDDLEWARE_CLASSES=('dealer.contrib.django.Middleware',),
 
         )
         from django.test import Client

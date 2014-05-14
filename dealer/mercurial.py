@@ -5,13 +5,14 @@ from __future__ import absolute_import
 from .base import SCMBackend, logger
 
 try:
-    from mercurial import ui, hg as HG, error  # nolint
+    from mercurial import ui, hg as HG, error  # noqa
 
     class Backend(SCMBackend):
 
-        " Mercurial backend. "
+        """ Mercurial backend. """
 
         def init_repo(self):
+            """ Initialize repository. """
             try:
                 self._repo = HG.repository(ui.ui(), path=self.path or '.')
                 self._revision = self._repo[len(self._repo) - 1].hex()
@@ -30,7 +31,10 @@ except ImportError:
 
     class Backend(SCMBackend):
 
+        """ Warning backend. """
+
         def init_repo(self):
+            """ Process error. """
             message = 'Mercurial is not installed.'
             if not self.options.get('silent'):
                 logger.error(message)
@@ -39,6 +43,3 @@ except ImportError:
 
 
 hg = Backend()
-
-
-# pymode:lint_ignore=W0201

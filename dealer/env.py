@@ -16,16 +16,13 @@ class Backend(SCMBackend):
         :return Backend:
 
         """
-
         from os import environ
         self._repo = self
 
         try:
-            # import pdb; pdb.set_trace()
             revision_env_keyname = self.options.get(
                 'revision_env_keyname') or self.default_revision_env_keyname
-            assert (revision_env_keyname in environ and environ[
-                    revision_env_keyname] != '')
+            assert (revision_env_keyname in environ and environ[revision_env_keyname] != '') # noqa
             self._revision = environ[revision_env_keyname]
         except AssertionError:
             message = 'Environment variable {0} not found'.format(

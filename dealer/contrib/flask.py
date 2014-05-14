@@ -28,6 +28,7 @@ class Dealer(object):
     """
 
     def __init__(self, app=None):
+        """" Init plugin. """
         self.type = 'auto'
         self.params = dict()
         self.backend = None
