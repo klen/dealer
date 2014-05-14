@@ -10,7 +10,7 @@ Use it for control a static's versions.
 
 """
 
-__version__ = '1.1.0'
+__version__ = '1.1.1'
 __project__ = __name__
 __author__ = "Kirill Klenov <horneds@gmail.com>"
 __license__ = "BSD"
@@ -22,7 +22,6 @@ def get_backend(name, **kwargs):
     :return Backend:
 
     """
-
     from importlib import import_module
 
     mod = import_module(__name__ + '.' + name)

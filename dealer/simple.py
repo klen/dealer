@@ -15,7 +15,6 @@ class Backend(SCMBackend):
         :return Backend:
 
         """
-
         from os import path as op
 
         try:
@@ -38,6 +37,3 @@ class Backend(SCMBackend):
 
 
 simple = Backend()
-
-
-# pymode:lint_ignore=W0201

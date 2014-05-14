@@ -10,6 +10,7 @@ class Backend(SCMBackend):
     default_backends = 'git', 'mercurial', 'simple', 'env', 'null'
 
     def __init__(self, **kwargs):
+        """ Init backend. """
         super(Backend, self).__init__(**kwargs)
         self._backend = None
 

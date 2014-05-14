@@ -120,7 +120,7 @@ Context-processor
 
 Append to your settings: ::
 
-    TEMPLATE_CONTEXT_PROCESSORS += 'dealer.contrib.django.staff.context_processor',
+    TEMPLATE_CONTEXT_PROCESSORS += 'dealer.contrib.django.context_processor',
 
 And use the *REVISION* and *TAG* variables in your templates: ::
 
@@ -132,7 +132,7 @@ Middleware
     
 Append to your settings: ::
 
-    MIDDLEWARE_CLASSES += 'dealer.contrib.django.staff.Middleware',
+    MIDDLEWARE_CLASSES += 'dealer.contrib.django.Middleware',
 
 And use in your views: ::
 

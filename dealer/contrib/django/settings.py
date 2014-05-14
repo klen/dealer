@@ -1,4 +1,6 @@
-from django.conf import settings  # nolint
+""" Django integration settings. """
+
+from django.conf import settings
 
 from dealer import get_backend
 

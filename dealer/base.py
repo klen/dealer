@@ -14,6 +14,7 @@ class SCMBackend(object):
     __meta__ = abc.ABCMeta
 
     def __init__(self, path=None, **options):
+        """ Init backend. """
         self.path = path
         self.options = options
 
@@ -29,7 +30,6 @@ class SCMBackend(object):
     @path.setter
     def path(self, path):
         """ Set path and clean current state. """
-
         self._path = path
         self._repo = None
         self._revision = None
