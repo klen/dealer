@@ -128,8 +128,8 @@ def test_flask():
     with app.test_request_context():
         client = app.test_client()
         response = client.get('/')
-        assert app.revision in response.data
-        assert app.tag in response.data
+        assert app.revision in response.data.decode('utf-8')
+        assert app.tag in response.data.decode('utf-8')
 
 
 def test_django():
