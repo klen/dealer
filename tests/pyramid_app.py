@@ -1,9 +1,11 @@
 from pyramid.config import Configurator
 from pyramid.renderers import render_to_response
+import os.path as op
 
 
 def revision(request):
-    return render_to_response('test.jinja2', {}, request=request)
+    return render_to_response(
+        op.dirname(op.abspath(__file__)) + '/test.jinja2', {}, request=request)
 
 config = Configurator()
 config.include('dealer.contrib.pyramid')

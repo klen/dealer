@@ -40,7 +40,7 @@ setup(
     description=read('DESCRIPTION'),
     long_description=read('README.rst'),
     platforms=('Any'),
-    keywords = "mercurial git static revision django flask".split(),
+    keywords="mercurial git static revision django flask".split(),
 
     author_email='horneds@gmail.com',
     url=' http://github.com/klen/dealer',
@@ -57,6 +57,6 @@ setup(
         'Environment :: Console',
     ],
 
-    packages=find_packages(),
+    packages=['dealer', 'dealer.contrib', 'dealer.contrib.django'],
     install_requires=REQUIREMENTS,
 )

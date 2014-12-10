@@ -24,7 +24,7 @@ def test_git():
     assert git.repo
 
 
-@pytest.mark.skipif(version_info < (3, 0), reason='requires python3')
+@pytest.mark.skipif(version_info > (3, 0), reason='requires python2')
 def test_hg():
     from dealer.mercurial import hg, Backend
 
