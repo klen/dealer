@@ -51,7 +51,7 @@ class SCMBackend(object):
         :return str:
 
         """
-        return self.repo and self._revision
+        return self.repo and _to_str(self._revision)
 
     @property
     def tag(self):
@@ -60,9 +60,15 @@ class SCMBackend(object):
         :return str:
 
         """
-        return self.repo and self._tag
+        return self.repo and _to_str(self._tag)
 
     @abc.abstractmethod
     def init_repo(self):
         """ Initialize repository. """
         raise NotImplementedError
+
+
+def _to_str(obj):
+    if not isinstance(obj, str):
+        return obj.decode()
+    return obj
