@@ -59,6 +59,4 @@ setup(
 
     packages=find_packages(),
     install_requires=REQUIREMENTS,
-    test_suite = 'tests',
-    tests_require=('flask', 'mercurial', 'django'),
 )
