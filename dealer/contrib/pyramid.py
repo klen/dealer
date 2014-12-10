@@ -18,8 +18,8 @@ def dealer_context(event):
     from pyramid.threadlocal import get_current_registry
     registry = get_current_registry()
     dealer = registry.dealer
-    event.rendering_val['DEALER_REVISION'] = dealer.revision
-    event.rendering_val['DEALER_TAG'] = dealer.tag
+    event.rendering_val['DEALER_REVISION'] = str(dealer.revision)
+    event.rendering_val['DEALER_TAG'] = str(dealer.tag)
 
 
 def includeme(config):
