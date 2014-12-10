@@ -21,24 +21,24 @@ Supported Git_, Mercurial_ and simple revision parse by file.
 
 .. _badges:
 
-.. image:: https://secure.travis-ci.org/klen/dealer.png?branch=develop
+.. image:: http://img.shields.io/travis/klen/dealer.svg?style=flat-square
     :target: http://travis-ci.org/klen/dealer
     :alt: Build Status
 
-.. image:: https://coveralls.io/repos/klen/dealer/badge.png?branch=develop
+.. image:: http://img.shields.io/coveralls/klen/dealer.svg?style=flat-square
     :target: https://coveralls.io/r/klen/dealer
     :alt: Coverals
 
-.. image:: https://pypip.in/v/dealer/badge.png
-    :target: https://crate.io/packages/dealer
+.. image:: http://img.shields.io/pypi/v/dealer.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/dealer
     :alt: Version
 
-.. image:: https://pypip.in/d/dealer/badge.png
-    :target: https://crate.io/packages/dealer
+.. image:: http://img.shields.io/pypi/dm/dealer.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/dealer
     :alt: Downloads
 
-.. image:: https://dl.dropboxusercontent.com/u/487440/reformal/donate.png
-    :target: https://www.gittip.com/klen/
+.. image:: http://img.shields.io/gratipay/klen.svg?style=flat-square
+    :target: https://www.gratipay.com/klen/
     :alt: Donate
 
 
@@ -171,6 +171,26 @@ In views::
 In templates: ::
 
     <link href="/test.css?{{ REVISION }}" rel="stylesheet" type="text/css" media="screen" />
+
+Pyramid support
+---------------
+
+::
+
+    config.include('dealer.contrib.pyramid')
+
+::
+
+    def myview(request):
+        revision = request.registry.dealer.revision
+        tag = request.registry.dealer.tag
+
+In templates
+
+::
+
+    Revision: {{DEALER_REVISION}}
+    Tag: {{DEALER_TAG}}
 
 
 Heroku support
