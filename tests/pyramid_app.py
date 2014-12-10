@@ -8,6 +8,7 @@ def revision(request):
         op.dirname(op.abspath(__file__)) + '/test.jinja2', {}, request=request)
 
 config = Configurator()
+config.registry.settings['dealer.context'] = True
 config.include('dealer.contrib.pyramid')
 config.include('pyramid_jinja2')
 config.add_route('revision', '/revision')

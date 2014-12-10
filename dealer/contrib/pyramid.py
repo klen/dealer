@@ -9,6 +9,7 @@ DEFAULTS = {
     'filename': None,
     'path': None,
     'silent': True,
+    'context': False,
     'type': 'auto',
 }
 
@@ -18,8 +19,9 @@ def dealer_context(event):
     from pyramid.threadlocal import get_current_registry
     registry = get_current_registry()
     dealer = registry.dealer
-    event.rendering_val['DEALER_REVISION'] = dealer.revision
-    event.rendering_val['DEALER_TAG'] = dealer.tag
+    if isinstance(event.rendering_val, dict):
+        event.rendering_val['DEALER_REVISION'] = dealer.revision
+        event.rendering_val['DEALER_TAG'] = dealer.tag
 
 
 def includeme(config):
@@ -36,4 +38,5 @@ def includeme(config):
         backends=settings['backends'], silent=settings['silent'],
     )
 
-    config.add_subscriber(dealer_context, 'pyramid.events.BeforeRender')
+    if settings['context']:
+        config.add_subscriber(dealer_context, 'pyramid.events.BeforeRender')
