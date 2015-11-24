@@ -24,7 +24,7 @@ clean:
 .PHONY: release
 VERSION?=minor
 # target: release - Bump version
-release:
+release: $(VIRTUALENV)
 	@$(VIRTUALENV)/bin/pip install bumpversion
 	@$(VIRTUALENV)/bin/bumpversion $(VERSION)
 	@git checkout master

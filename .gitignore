@@ -6,3 +6,4 @@ dist
 .tags
 .vimrc
 .tox
+.env
