@@ -20,4 +20,4 @@ class Middleware(object):
     def process_request(request):
         """ Add revision and tag to request. """
         request.revision = BACKEND.revision
-        request.tag = BACKEND.revision
+        request.tag = BACKEND.tag
