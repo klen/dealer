@@ -34,6 +34,7 @@ class SCMBackend(object):
         self._repo = None
         self._revision = None
         self._tag = None
+        self._branch = None
 
     @property
     def repo(self):
@@ -58,6 +59,14 @@ class SCMBackend(object):
         :return str:
         """
         return self.repo and _to_str(self._tag)
+
+    @property
+    def branch(self):
+        """Get current branch.
+
+        :return str:
+        """
+        return self.repo and _to_str(self._branch)
 
     @abc.abstractmethod
     def init_repo(self):

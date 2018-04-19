@@ -10,6 +10,7 @@ def test_git():
     assert git.repo
     assert git.revision
     assert git.tag
+    assert git.branch
 
     git.path = 'invalid/path/to/git'
     assert not git._repo
@@ -123,13 +124,16 @@ def test_flask():
     app = Flask('test')
     Dealer(app)
     assert app.revision
+    assert app.tag
+    assert app.branch
 
-    app.route('/')(lambda: "%s - %s" % (g.revision, g.tag))
+    app.route('/')(lambda: "%s - %s - %s" % (g.revision, g.tag, g.branch))
     with app.test_request_context():
         client = app.test_client()
         response = client.get('/')
         assert app.revision in response.data.decode('utf-8')
         assert app.tag in response.data.decode('utf-8')
+        assert app.branch in response.data.decode('utf-8')
 
 
 def test_django():

@@ -52,13 +52,14 @@ class Dealer(object):
         self.params = app.config.get('DEALER_PARAMS', dict())
         self.backend = backend = get_backend(self.type, **self.params)
 
-        app.context_processor(
-            lambda: dict(REVISION=backend.revision, TAG=backend.tag))
+        app.context_processor(lambda: dict(REVISION=backend.revision, TAG=backend.tag, BRANCH=backend.branch))
         app.revision = backend.revision
         app.tag = backend.tag
+        app.branch = backend.branch
 
         def path_g():
             g.revision = backend.revision
             g.tag = backend.tag
+            g.branch = backend.branch
 
         app.before_first_request(path_g)
