@@ -7,3 +7,5 @@ dist
 .vimrc
 .tox
 .env
+/.idea/
+/.pytest_cache/

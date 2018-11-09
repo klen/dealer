@@ -70,6 +70,7 @@ class Backend(SCMBackend):
             self._repo = GitRepo(self.path)
             self._revision = self.repo.git('log -1 --format=%h')
             self._tag = self.repo.git('describe --always --tags')
+            self._branch = self.repo.git("rev-parse --abbrev-ref HEAD")
             return self._repo
 
         except GitException as e:

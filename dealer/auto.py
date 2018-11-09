@@ -38,6 +38,7 @@ class Backend(SCMBackend):
             self._repo = self._backend.repo
             self._revision = self._backend.revision
             self._tag = self._backend.tag
+            self._branch = self._backend.branch
             return self._repo
 
         raise TypeError('Invalid project: {0}'.format(self.path))
