@@ -58,8 +58,9 @@ register:
 # target: upload - Upload module on PyPi
 upload: clean
 	@pip install twine wheel
-	@python setup.py sdist upload
-	@python setup.py bdist_wheel upload
+	@python setup.py sdist bdist_wheel
+	@$(VIRTUAL_ENV)/bin/twine upload dist/*
+	@$(VIRTUAL_ENV)/bin/pip install -e $(CURDIR)
 
 # =============
 #  Development
