@@ -9,3 +9,5 @@ dist
 .env
 /.idea/
 /.pytest_cache/
+cache
+.coverage

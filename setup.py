@@ -11,7 +11,7 @@ SCM watcher tool. Get current revision and send update notify.
 import sys
 from os import path as op
 
-from setuptools import setup, find_packages
+from setuptools import setup
 
 
 def read(fname):
@@ -53,7 +53,7 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.5',
         'Environment :: Console',
     ],
 

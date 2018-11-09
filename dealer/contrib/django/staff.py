@@ -12,12 +12,17 @@ def context_processor(request):
     return dict(REVISION=BACKEND.revision, TAG=BACKEND.tag)
 
 
-class Middleware(object):
+class Middleware:
 
     """ Append current SCM revision to request object. """
 
-    @staticmethod
-    def process_request(request):
+    __slots__ = 'get_response',
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
         """ Add revision and tag to request. """
         request.revision = BACKEND.revision
         request.tag = BACKEND.tag
+        return self.get_response(request)
