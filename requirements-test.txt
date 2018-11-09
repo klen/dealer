@@ -5,5 +5,4 @@ pyramid
 pyramid_jinja2
 flask
 ipdb
-mercurial
 pytest

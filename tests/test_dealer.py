@@ -10,6 +10,7 @@ def test_git():
     assert git.repo
     assert git.revision
     assert git.tag
+    assert git.branch
 
     git.path = 'invalid/path/to/git'
     assert not git._repo
@@ -123,29 +124,44 @@ def test_flask():
     app = Flask('test')
     Dealer(app)
     assert app.revision
+    assert app.tag
+    assert app.branch
 
-    app.route('/')(lambda: "%s - %s" % (g.revision, g.tag))
+    app.route('/')(lambda: "%s - %s - %s" % (g.revision, g.tag, g.branch))
     with app.test_request_context():
         client = app.test_client()
         response = client.get('/')
         assert app.revision in response.data.decode('utf-8')
         assert app.tag in response.data.decode('utf-8')
+        assert app.branch in response.data.decode('utf-8')
 
 
+@pytest.mark.skipif(version_info < (3, 0), reason='requires python3')
 def test_django():
     import os
     os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.django_app.settings'
 
+    import django
+
+    django.setup()
+
     from django.test import Client
+    from dealer.git import git
 
     client = Client()
     revision = client.get('/revision/')
     assert revision.status_code == 200
     assert revision.content
+    assert git.revision in str(revision.content)
 
     tag = client.get('/tag/')
     assert tag.status_code == 200
     assert tag.content
+
+    revision = client.get('/template/')
+    assert revision.status_code == 200
+    assert revision.content
+    assert git.revision in str(revision.content)
 
 
 def test_pyramid():

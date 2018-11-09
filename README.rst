@@ -18,6 +18,8 @@ Supported Git_, Mercurial_ and simple revision parse by file.
 
 .. note:: You should install Mercurial_ for hg support.
 
+.. note:: For Django<2 please use Dealer<3
+
 
 .. _badges:
 
@@ -52,7 +54,9 @@ Supported Git_, Mercurial_ and simple revision parse by file.
 Requirements
 =============
 
-- python (2.6, 2.7, 3.3)
+- python 2.7, 3.5+
+
+.. note:: For Django<2 please use Dealer<3
 
 
 .. _installation:
@@ -118,9 +122,10 @@ Settings
 Context-processor
 ^^^^^^^^^^^^^^^^^
 
-Append to your settings: ::
+Append to your context processors: ::
 
-    TEMPLATE_CONTEXT_PROCESSORS += 'dealer.contrib.django.context_processor',
+    ...
+    context_processors = ['dealer.contrib.django.context_processor']
 
 And use the *REVISION* and *TAG* variables in your templates: ::
 
@@ -132,7 +137,7 @@ Middleware
     
 Append to your settings: ::
 
-    MIDDLEWARE_CLASSES += 'dealer.contrib.django.Middleware',
+    MIDDLEWARE = ['dealer.contrib.django.Middleware']
 
 And use in your views: ::
 
