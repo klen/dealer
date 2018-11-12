@@ -18,7 +18,7 @@ Supported Git_, Mercurial_ and simple revision parse by file.
 
 .. note:: You should install Mercurial_ for hg support.
 
-.. note:: For Django<2 please use Dealer<3
+.. note:: For Django<2 please use Dealer<2
 
 
 .. _badges:
@@ -56,7 +56,7 @@ Requirements
 
 - python 2.7, 3.5+
 
-.. note:: For Django<2 please use Dealer<3
+.. note:: For Django<2 please use Dealer<2
 
 
 .. _installation:
